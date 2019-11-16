@@ -34,7 +34,7 @@ public class AppMain implements CommandLineRunner {
 		Map<String, Object> emfPropertiesMap = emf.getProperties();
 		log.info( ">> EMF PROPERTIES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
 		for (Map.Entry<String, Object> entry : emfPropertiesMap.entrySet()) {
-			log.debug(entry.getKey()+ " : "+entry.getValue());
+			log.debug(entry.getKey() + " : " + entry.getValue());
 		}
 		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
 	}
