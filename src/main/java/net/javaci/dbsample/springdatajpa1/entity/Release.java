@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "app_release") //  release is a special keyword in mysql @see https://forums.mysql.com/read.php?101,665004,665004
+@Table(name = "apprelease") //  release is a special keyword in mysql @see https://forums.mysql.com/read.php?101,665004,665004
 public class Release {
 
 	@Id
