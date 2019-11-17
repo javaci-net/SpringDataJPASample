@@ -1,5 +1,8 @@
 package net.javaci.dbsample.springdatajpa1.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,5 +20,7 @@ public class Ticket {
 	private String description;
 	private String status;
 	private String title;
+	private LocalDate createDate;
+	private LocalDateTime createDateTime;
 	
 }
