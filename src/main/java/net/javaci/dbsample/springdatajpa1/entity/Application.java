@@ -30,7 +30,8 @@ public class Application {
 
 	public String owner;
     
-    @OneToMany(cascade = CascadeType.PERSIST)
+    // @OneToMany(mappedBy = "application")
+	@OneToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
 			name = "ticket_application",
 			joinColumns =  @JoinColumn(name="application_fk"),
