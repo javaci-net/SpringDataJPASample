@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
@@ -26,7 +28,12 @@ public class Ticket {
 	private LocalDateTime createDateTime;
 	
 	@ManyToOne
-	// @JoinColumn(name = "application_id" )
+	// @JoinTable(name = "ticket_application")
+	@JoinTable(
+			name = "ticket_application",
+			joinColumns =  @JoinColumn(name="ticket_fk"),
+			inverseJoinColumns = @JoinColumn(name = "application_fk")
+	)
 	private Application application;
 	
 	@Transient
