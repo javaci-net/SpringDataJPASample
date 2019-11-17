@@ -28,12 +28,14 @@ public class Ticket {
 	private LocalDateTime createDateTime;
 	
 	@ManyToOne
+	/*--
 	// @JoinTable(name = "ticket_application")
 	@JoinTable(
 			name = "ticket_application",
 			joinColumns =  @JoinColumn(name="ticket_fk"),
 			inverseJoinColumns = @JoinColumn(name = "application_fk")
 	)
+	*/
 	private Application application;
 	
 	@Transient

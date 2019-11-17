@@ -30,13 +30,16 @@ public class Application {
 
 	public String owner;
     
-    // @OneToMany(mappedBy = "application")
+    
+	/*--
 	@OneToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
 			name = "ticket_application",
 			joinColumns =  @JoinColumn(name="application_fk"),
 			inverseJoinColumns = @JoinColumn(name = "ticket_fk")
 	)
+	*/
+	@OneToMany(mappedBy = "application")
     public List<Ticket> tickets = new ArrayList<Ticket>();
     
     // On the target side, we only have to provide 
