@@ -1,10 +1,17 @@
 package net.javaci.dbsample.springdatajpa1.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Application {
@@ -14,10 +21,18 @@ public class Application {
     private Integer id;
 	
 	@Column(length = 2000)
-    private String description;
+	public String description;
 	
 	@Column(name = "app_name", nullable = false)
-    private String name;
+	public String name;
 
-    private String owner;
+	public String owner;
+    
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+			name = "ticket_application",
+			joinColumns =  @JoinColumn(name="application_fk"),
+			inverseJoinColumns = @JoinColumn(name = "ticket_fk")
+	)
+    public List<Ticket> tickets = new ArrayList<Ticket>();
 }
