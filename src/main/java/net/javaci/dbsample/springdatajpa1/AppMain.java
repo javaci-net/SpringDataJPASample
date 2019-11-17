@@ -3,6 +3,7 @@ package net.javaci.dbsample.springdatajpa1;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -72,7 +73,12 @@ public class AppMain implements CommandLineRunner {
 
 	private void testRead() {
 		
-		
+		Application app1 = applicationDAO.getApplicationById(1);
+		log.info("Name: {}", app1.getName());
+		List<Ticket> tickets = app1.getTickets();
+		tickets.forEach(t->log.info("Ticket Title: {}", t.getTitle()));
+		Set<Release> releasesToDeploy = app1.getReleasesToDeploy();
+		releasesToDeploy.forEach(r->log.info("Release name: {}", r.getName()));
 	}
 	
 	private void printDBInfo() {
