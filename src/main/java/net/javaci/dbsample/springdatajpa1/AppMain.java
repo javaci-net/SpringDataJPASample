@@ -61,14 +61,22 @@ public class AppMain implements CommandLineRunner {
 		Application facebookMobileApp = new Application("Facebook Mobile App", "Facebook Mobile", "dogancan");
 		applicationDAO.addApplication(facebookMobileApp);
 		
-		Ticket ticket = new Ticket("Login failed when empty", "OPEN", "Login Bug", LocalDate.now(), LocalDateTime.now(), facebookWebApp);
-		ticketDAO.addTicket(ticket);
+		Ticket ticket1 = new Ticket("Login failed when empty", "OPEN", "Login Bug", LocalDate.now(), LocalDateTime.now(), facebookWebApp);
+		ticketDAO.addTicket(ticket1);
+		Ticket ticket2 = new Ticket("Password reminder not working", "OPEN", "Login Bug", LocalDate.now(), LocalDateTime.now(), facebookWebApp);
+		ticketDAO.addTicket(ticket2);
 		
-		Set<Application> deployedApplications = new HashSet<Application>();
-		deployedApplications.add(facebookWebApp);
-		deployedApplications.add(facebookCoreSystemApp);
-		Release release = new Release("v1", LocalDateTime.now().plusDays(10), deployedApplications);
-		releaseDAO.addRelease(release);
+		Set<Application> deployedApplications1 = new HashSet<Application>();
+		deployedApplications1.add(facebookWebApp);
+		deployedApplications1.add(facebookCoreSystemApp);
+		Release release1 = new Release("v1", LocalDateTime.now().plusDays(10), deployedApplications1);
+		releaseDAO.addRelease(release1);
+		
+		Set<Application> deployedApplications2 = new HashSet<Application>();
+		deployedApplications2.add(facebookWebApp);
+		deployedApplications2.add(facebookMobileApp);
+		Release release2 = new Release("v2", LocalDateTime.now().plusDays(10), deployedApplications2);
+		releaseDAO.addRelease(release2);
 	}
 
 	private void testRead() {
