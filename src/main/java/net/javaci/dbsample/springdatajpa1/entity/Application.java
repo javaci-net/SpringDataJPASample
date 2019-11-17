@@ -28,11 +28,14 @@ public class Application {
 
 	public String owner;
     
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "application")
+    // @OneToMany(mappedBy = "application") // belirtmeye gerek yok, mapped by dan cozuyor
+    /*
     @JoinTable(
 			name = "ticket_application",
 			joinColumns =  @JoinColumn(name="application_fk"),
 			inverseJoinColumns = @JoinColumn(name = "ticket_fk")
 	)
+	*/
     public List<Ticket> tickets = new ArrayList<Ticket>();
 }
