@@ -20,4 +20,9 @@ public class TicketDAOImpl implements TicketDAO {
     public void addTicket(Ticket ticket) {
         entityManager.persist(ticket);
     }
+	
+	@Override
+    public Ticket getTicketById(int ticketId) {
+        return entityManager.find(Ticket.class, ticketId);
+    }
 }

@@ -20,4 +20,9 @@ public class ReleaseDAOImpl implements ReleaseDAO {
 	public void addRelease(Release release) {
 		entityManager.persist(release);
 	}
+	
+	@Override
+    public Release getReleaseById(int releaseId) {
+        return entityManager.find(Release.class, releaseId);
+    }
 }

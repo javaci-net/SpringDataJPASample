@@ -5,5 +5,7 @@ import net.javaci.dbsample.springdatajpa1.entity.Release;
 public interface ReleaseDAO {
 
 	void addRelease(Release release);
+
+	Release getReleaseById(int releaseId);
 	
 }

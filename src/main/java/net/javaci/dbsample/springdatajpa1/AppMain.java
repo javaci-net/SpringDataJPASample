@@ -47,6 +47,8 @@ public class AppMain implements CommandLineRunner {
 		
 		testPersist();
 		
+		testRead();
+		
 	}
 
 	private void testPersist() {
@@ -68,6 +70,11 @@ public class AppMain implements CommandLineRunner {
 		releaseDAO.addRelease(release);
 	}
 
+	private void testRead() {
+		
+		
+	}
+	
 	private void printDBInfo() {
 		EntityManagerFactory emf = entityManager.getEntityManagerFactory();     
 		Map<String, Object> emfPropertiesMap = emf.getProperties();

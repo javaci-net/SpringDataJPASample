@@ -20,4 +20,9 @@ public class ApplicationDAOImpl implements ApplicationDAO {
     public void addApplication(Application application) {
         entityManager.persist(application);
     }
+	
+	@Override
+    public Application getApplicationById(int applicationId) {
+        return entityManager.find(Application.class, applicationId);
+    }
 }
