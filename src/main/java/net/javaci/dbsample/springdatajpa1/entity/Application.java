@@ -42,4 +42,74 @@ public class Application {
  	// the name , which maps the relationship
  	@ManyToMany(mappedBy = "deployedApplications")
  	private Set<Release> releasesToDeploy;
+
+ 	public Application() {
+ 		super();
+ 	}
+ 	
+ 	public Application(String description, String name, String owner) {
+		super();
+		this.description = description;
+		this.name = name;
+		this.owner = owner;
+	}
+ 	
+	public Application(String description, String name, String owner, List<Ticket> tickets,
+			Set<Release> releasesToDeploy) {
+		super();
+		this.description = description;
+		this.name = name;
+		this.owner = owner;
+		this.tickets = tickets;
+		this.releasesToDeploy = releasesToDeploy;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+	public Set<Release> getReleasesToDeploy() {
+		return releasesToDeploy;
+	}
+
+	public void setReleasesToDeploy(Set<Release> releasesToDeploy) {
+		this.releasesToDeploy = releasesToDeploy;
+	}
+
 }

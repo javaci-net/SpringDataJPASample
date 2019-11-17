@@ -30,4 +30,55 @@ public class Release {
 		inverseJoinColumns = @JoinColumn(name = "application_fk")
 	)
 	private Set<Application> deployedApplications;
+
+	public Release() {
+		super();
+	}
+	
+	public Release(String name, LocalDateTime releaseDateTime) {
+		super();
+		this.name = name;
+		this.releaseDateTime = releaseDateTime;
+	}
+	
+	public Release(String name, LocalDateTime releaseDateTime, Set<Application> deployedApplications) {
+		super();
+		this.name = name;
+		this.releaseDateTime = releaseDateTime;
+		this.deployedApplications = deployedApplications;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDateTime getReleaseDateTime() {
+		return releaseDateTime;
+	}
+
+	public void setReleaseDateTime(LocalDateTime releaseDateTime) {
+		this.releaseDateTime = releaseDateTime;
+	}
+
+	public Set<Application> getDeployedApplications() {
+		return deployedApplications;
+	}
+
+	public void setDeployedApplications(Set<Application> deployedApplications) {
+		this.deployedApplications = deployedApplications;
+	}
+	
+	
 }
