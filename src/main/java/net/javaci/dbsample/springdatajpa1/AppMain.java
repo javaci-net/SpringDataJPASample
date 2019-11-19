@@ -54,6 +54,8 @@ public class AppMain implements CommandLineRunner {
 		
 		testReadWithCriteria();
 		
+		testUpdate();
+		
 	}
 
 	private void testPersist() {
@@ -133,6 +135,24 @@ public class AppMain implements CommandLineRunner {
 		log.info("Is app exists with name {} and owner {} ? {}", name, owner, appExists);
 		
 		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
+	}
+	
+	private void testUpdate() {
+		
+		log.info( ">> TEST UPDATE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+		
+		Integer id = 1;
+		String newName = "Facebook.com";
+		String newOwner = "volkan";
+		boolean updateSuccess = applicationDAO.updateNameAndOwnerById(id, newName, newOwner);
+		
+		Application updated = applicationDAO.getApplicationById(1);
+		
+		log.info("Is updated? {}, new name: {}, new owner: {}", 
+				updateSuccess, updated.getName(), updated.getOwner());
+		
+		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
+		
 	}
 	
 	private void printDBInfo() {

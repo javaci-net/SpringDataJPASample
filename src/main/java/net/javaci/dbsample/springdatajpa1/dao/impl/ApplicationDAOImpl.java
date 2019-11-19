@@ -63,5 +63,15 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 		int count = entityManager.createQuery(cq).getResultList().size();
 		return count > 0;
 	}
+
+	@Override
+	public boolean updateNameAndOwnerById(Integer id, String newName, String newOwner) {
+		
+		Application app = getApplicationById(id);
+		app.setName(newName);
+		app.setOwner(newOwner);
+		entityManager.flush();
+		return true;
+	}
 	
 }
