@@ -40,7 +40,7 @@ public class Application {
 	)
 	*/
 	@OneToMany(mappedBy = "application")
-    public List<Ticket> tickets = new ArrayList<Ticket>();
+    public List<Ticket> tickets;
     
     // On the target side, we only have to provide 
  	// the name , which maps the relationship

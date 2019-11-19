@@ -48,45 +48,62 @@ public class AppMain implements CommandLineRunner {
 		
 		testPersist();
 		
-		testRead();
+		testReadWithIdPrimaryKey();
 		
 	}
 
 	private void testPersist() {
 		
+		log.info( ">> TEST PERSIST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+		
 		Application facebookWebApp = new Application("Facebook Web App", "Facebook.com", "volkan");
+		log.info("** Adding facebookWebApp: {}", facebookWebApp);
 		applicationDAO.addApplication(facebookWebApp);
 		Application facebookCoreSystemApp = new Application("Facebook Core System", "Facebook Core", "koray");
+		log.info("** Adding facebookCoreSystemApp: {}", facebookCoreSystemApp);
 		applicationDAO.addApplication(facebookCoreSystemApp);
 		Application facebookMobileApp = new Application("Facebook Mobile App", "Facebook Mobile", "dogancan");
+		log.info("** Adding facebookMobileApp: {}", facebookMobileApp);
 		applicationDAO.addApplication(facebookMobileApp);
 		
 		Ticket ticket1 = new Ticket("Login failed when empty", "OPEN", "Login Bug", LocalDate.now(), LocalDateTime.now(), facebookWebApp);
+		log.info("** Adding ticket1: {}", ticket1);
 		ticketDAO.addTicket(ticket1);
-		Ticket ticket2 = new Ticket("Password reminder not working", "OPEN", "Login Bug", LocalDate.now(), LocalDateTime.now(), facebookWebApp);
+		Ticket ticket2 = new Ticket("Password reminder not working", "CLOSED", "Pwd Remind Bug", LocalDate.now(), LocalDateTime.now(), facebookWebApp);
+		log.info("** Adding ticket2: {}", ticket2);
 		ticketDAO.addTicket(ticket2);
 		
 		Set<Application> deployedApplications1 = new HashSet<Application>();
 		deployedApplications1.add(facebookWebApp);
 		deployedApplications1.add(facebookCoreSystemApp);
 		Release release1 = new Release("v1", LocalDateTime.now().plusDays(10), deployedApplications1);
+		log.info("** Adding release1: {}", release1);
 		releaseDAO.addRelease(release1);
 		
 		Set<Application> deployedApplications2 = new HashSet<Application>();
 		deployedApplications2.add(facebookWebApp);
 		deployedApplications2.add(facebookMobileApp);
 		Release release2 = new Release("v2", LocalDateTime.now().plusDays(10), deployedApplications2);
+		log.info("** Adding release2: {}", release2);
 		releaseDAO.addRelease(release2);
+		
+		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
 	}
 
-	private void testRead() {
+	private void testReadWithIdPrimaryKey() {
 		
+		log.info( ">> TEST READ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+		
+		// Gets no lazy exception because spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
+		// How to handle Lazy? https://vladmihalcea.com/the-best-way-to-handle-the-lazyinitializationexception/
 		Application app1 = applicationDAO.getApplicationById(1);
 		log.info("Name: {}", app1.getName());
 		List<Ticket> tickets = app1.getTickets();
-		tickets.forEach(t->log.info("Ticket Title: {}", t.getTitle()));
+		tickets.forEach(t->log.info("** Ticket Title: {}", t.getTitle()));
 		Set<Release> releasesToDeploy = app1.getReleasesToDeploy();
-		releasesToDeploy.forEach(r->log.info("Release name: {}", r.getName()));
+		releasesToDeploy.forEach(r->log.info("** Release name: {}", r.getName()));
+		
+		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
 	}
 	
 	private void printDBInfo() {
@@ -94,7 +111,7 @@ public class AppMain implements CommandLineRunner {
 		Map<String, Object> emfPropertiesMap = emf.getProperties();
 		log.info( ">> EMF PROPERTIES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
 		for (Map.Entry<String, Object> entry : emfPropertiesMap.entrySet()) {
-			log.info(entry.getKey() + " : " + entry.getValue());
+			log.info("** " + entry.getKey() + " : " + entry.getValue());
 		}
 		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
 	}
