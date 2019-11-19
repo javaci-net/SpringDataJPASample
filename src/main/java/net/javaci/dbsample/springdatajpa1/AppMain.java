@@ -50,6 +50,8 @@ public class AppMain implements CommandLineRunner {
 		
 		testReadWithIdPrimaryKey();
 		
+		testReadWithJpql();
+		
 	}
 
 	private void testPersist() {
@@ -102,6 +104,18 @@ public class AppMain implements CommandLineRunner {
 		tickets.forEach(t->log.info("** Ticket Title: {}", t.getTitle()));
 		Set<Release> releasesToDeploy = app1.getReleasesToDeploy();
 		releasesToDeploy.forEach(r->log.info("** Release name: {}", r.getName()));
+		
+		
+	}
+	
+	private void testReadWithJpql() {
+		
+		log.info( ">> TEST READ WITH JPQL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+		
+		String name = "Facebook.com";
+		String owner = "volkan";
+		boolean appExists = applicationDAO.applicationExists(name, owner);
+		log.info("Is app exists with name {} and owner {} ? {}", name, owner, appExists);
 		
 		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
 	}

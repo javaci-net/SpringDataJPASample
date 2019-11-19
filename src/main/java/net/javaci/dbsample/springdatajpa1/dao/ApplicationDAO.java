@@ -7,5 +7,7 @@ public interface ApplicationDAO {
 	void addApplication(Application application);
 
 	Application getApplicationById(int applicationId);
+
+	boolean applicationExists(String name, String owner);
 	
 }
