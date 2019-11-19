@@ -52,6 +52,8 @@ public class AppMain implements CommandLineRunner {
 		
 		testReadWithJpql();
 		
+		testReadWithCriteria();
+		
 	}
 
 	private void testPersist() {
@@ -115,6 +117,19 @@ public class AppMain implements CommandLineRunner {
 		String name = "Facebook.com";
 		String owner = "volkan";
 		boolean appExists = applicationDAO.applicationExists(name, owner);
+		log.info("Is app exists with name {} and owner {} ? {}", name, owner, appExists);
+		
+		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
+	}
+	
+	
+	private void testReadWithCriteria() {
+		
+		log.info( ">> TEST READ WITH CRITERIA >>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+		
+		String name = "Facebook.com";
+		String owner = "volkan";
+		boolean appExists = applicationDAO.applicationReallyExists(name, owner);
 		log.info("Is app exists with name {} and owner {} ? {}", name, owner, appExists);
 		
 		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");

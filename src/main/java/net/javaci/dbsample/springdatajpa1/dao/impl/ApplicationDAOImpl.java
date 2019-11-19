@@ -1,7 +1,12 @@
 package net.javaci.dbsample.springdatajpa1.dao.impl;
 
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -39,5 +44,24 @@ public class ApplicationDAOImpl implements ApplicationDAO {
         		.size();
         return count > 0;
     }
+	
+	@Override
+	public boolean applicationReallyExists(String name, String owner) {
+		
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Application> cq = cb.createQuery(Application.class);
+		
+		Root<Application> root = cq.from(Application.class);
+
+		cq.select(root).where( 
+			cb.and( 
+				cb.equal(root.<Set<String>>get("name"), name),
+				cb.equal(root.<Set<String>>get("owner"), owner)
+			)
+		);
+		
+		int count = entityManager.createQuery(cq).getResultList().size();
+		return count > 0;
+	}
 	
 }

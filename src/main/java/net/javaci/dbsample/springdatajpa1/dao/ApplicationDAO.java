@@ -9,5 +9,7 @@ public interface ApplicationDAO {
 	Application getApplicationById(int applicationId);
 
 	boolean applicationExists(String name, String owner);
+
+	boolean applicationReallyExists(String name, String owner);
 	
 }
