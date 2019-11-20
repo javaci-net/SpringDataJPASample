@@ -1,5 +1,7 @@
 package net.javaci.dbsample.springdatajpa1.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -25,4 +27,18 @@ public class TicketDAOImpl implements TicketDAO {
     public Ticket getTicketById(int ticketId) {
         return entityManager.find(Ticket.class, ticketId);
     }
+
+	@Override
+	public boolean removeTickets(List<Ticket> tickets) {
+		for (Ticket ticket : tickets) {
+			removeTicket(ticket);
+		}
+		return true;
+	}
+
+	@Override
+	public boolean removeTicket(Ticket ticket) {
+		entityManager.remove(entityManager.merge(ticket));
+		return true;
+	}
 }

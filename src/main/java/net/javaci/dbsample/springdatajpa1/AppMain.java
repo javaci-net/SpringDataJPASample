@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -55,6 +57,8 @@ public class AppMain implements CommandLineRunner {
 		testReadWithCriteria();
 		
 		testUpdate();
+		
+		testRemove();
 		
 	}
 
@@ -153,6 +157,27 @@ public class AppMain implements CommandLineRunner {
 		
 		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
 		
+	}
+	
+	private void testRemove() {
+		
+		log.info( ">> TEST REMOVE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+		
+		Application application = applicationDAO.getApplicationById(1);
+		
+		List<Ticket> tickets = application.getTickets();
+		List<Integer> ticketIdList = tickets.stream().mapToInt(t->t.getId()).boxed().collect(Collectors.toList());
+		ticketDAO.removeTickets(tickets);
+
+		boolean stillNotRemoved = false;
+		for (Integer ticketId : ticketIdList) {
+			Ticket removedTicket = ticketDAO.getTicketById(ticketId);
+			stillNotRemoved = (removedTicket==null);
+		}
+		
+		log.info("Is removed? {}", stillNotRemoved);
+		
+		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
 	}
 	
 	private void printDBInfo() {
