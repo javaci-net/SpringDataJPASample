@@ -13,5 +13,7 @@ public interface ApplicationDAO {
 	boolean applicationReallyExists(String name, String owner);
 
 	boolean updateNameAndOwnerById(Integer id, String newName, String newOwner);
+
+	Application getApplicationWithTicketsAndReleases(int applicationId);
 	
 }

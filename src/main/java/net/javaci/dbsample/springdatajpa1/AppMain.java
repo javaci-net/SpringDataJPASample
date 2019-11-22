@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -106,13 +105,15 @@ public class AppMain implements CommandLineRunner {
 		
 		// Gets no lazy exception because spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
 		// How to handle Lazy? https://vladmihalcea.com/the-best-way-to-handle-the-lazyinitializationexception/
-		Application app1 = applicationDAO.getApplicationById(1);
+		// Application app1 = applicationDAO.getApplicationById(1);
+		
+		Application app1 = applicationDAO.getApplicationWithTicketsAndReleases(1);
+		
 		log.info("Name: {}", app1.getName());
 		List<Ticket> tickets = app1.getTickets();
 		tickets.forEach(t->log.info("** Ticket Title: {}", t.getTitle()));
 		Set<Release> releasesToDeploy = app1.getReleasesToDeploy();
 		releasesToDeploy.forEach(r->log.info("** Release name: {}", r.getName()));
-		
 		
 	}
 	
@@ -163,7 +164,10 @@ public class AppMain implements CommandLineRunner {
 		
 		log.info( ">> TEST REMOVE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
 		
-		Application application = applicationDAO.getApplicationById(1);
+		// Gets lazy init exception
+		// Application application = applicationDAO.getApplicationById(1);
+		
+		Application application = applicationDAO.getApplicationWithTicketsAndReleases(1);
 		
 		List<Ticket> tickets = application.getTickets();
 		List<Integer> ticketIdList = tickets.stream().mapToInt(t->t.getId()).boxed().collect(Collectors.toList());

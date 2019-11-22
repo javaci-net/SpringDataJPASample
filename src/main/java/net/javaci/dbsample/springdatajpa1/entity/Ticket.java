@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,6 @@ public class Ticket {
 	private LocalDate createDate;
 	private LocalDateTime createDateTime;
 	
-	@ManyToOne
 	/*--
 	// @JoinTable(name = "ticket_application")
 	@JoinTable(
@@ -36,6 +36,7 @@ public class Ticket {
 			inverseJoinColumns = @JoinColumn(name = "application_fk")
 	)
 	*/
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Application application;
 	
 	@Transient

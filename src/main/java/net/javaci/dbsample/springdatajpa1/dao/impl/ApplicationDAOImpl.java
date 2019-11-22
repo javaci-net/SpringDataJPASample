@@ -32,6 +32,39 @@ public class ApplicationDAOImpl implements ApplicationDAO {
     }
 	
 	@Override
+    public Application getApplicationWithTicketsAndReleases(int applicationId) {
+        
+		String jpql = "SELECT a from Application a "
+				+ "INNER JOIN FETCH a.tickets t "
+				+ "INNER JOIN FETCH a.releasesToDeploy r "
+				+ "WHERE a.id=?";
+		
+		// with fetch only one select is executed
+		// https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/fetch-join.html
+		
+		Application result = entityManager
+        		.createQuery(jpql, Application.class)
+        		.setParameter(0, applicationId)
+        		.getSingleResult();
+		
+		// Real select:
+		/*-- 
+		 * select 
+		 *  ... 
+		 * from application A 
+		 *  inner join ticket T 
+		 *     on A.id=T.application_id 
+		 *  inner join apprelease_application AR 
+		 *     on A.id=AR.application_fk 
+		 *  inner join apprelease R 
+		 *     on AR.release_fk=R.id 
+		 * where A.id=?
+		 */
+
+		return result;
+    }
+	
+	@Override
     public boolean applicationExists(String name, String owner) {
         // note application is the class name; not the table name; 
 		// class name is case sensitive; use class field names - column names
