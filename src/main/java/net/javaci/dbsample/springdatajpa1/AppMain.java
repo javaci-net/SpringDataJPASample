@@ -167,7 +167,7 @@ public class AppMain implements CommandLineRunner {
 		// Gets lazy init exception
 		// Application application = applicationDAO.getApplicationById(1);
 		
-		Application application = applicationDAO.getApplicationWithTicketsAndReleases(1);
+		Application application = applicationDAO.getApplicationWithTicketsAndReleasesV2(1);
 		
 		List<Ticket> tickets = application.getTickets();
 		List<Integer> ticketIdList = tickets.stream().mapToInt(t->t.getId()).boxed().collect(Collectors.toList());

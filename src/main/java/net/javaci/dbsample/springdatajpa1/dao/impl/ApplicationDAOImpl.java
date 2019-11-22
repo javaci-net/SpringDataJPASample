@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
@@ -59,6 +61,41 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 		 *  inner join apprelease R 
 		 *     on AR.release_fk=R.id 
 		 * where A.id=?
+		 */
+
+		return result;
+    }
+	
+	@Override
+    public Application getApplicationWithTicketsAndReleasesV2(int applicationId) {
+        
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Application> cq = cb.createQuery(Application.class);
+		
+		Root<Application> root = cq.from(Application.class);
+		root.fetch("tickets", JoinType.INNER);
+		root.fetch("releasesToDeploy", JoinType.INNER);
+		
+		cq.where( cb.equal(root.<Set<Integer>>get("id"), applicationId) );
+		
+		Application result = entityManager
+        		.createQuery(cq)
+        		.getSingleResult();
+		
+		// Real select:
+		/*-- 
+		 * select 
+		 *   ...
+		 * from 
+		 *   application A 
+		 *   inner join ticket T 
+		 *      on A.id=T.application_id 
+		 *   inner join apprelease_application AR 
+		 *      on A.id=AR.application_fk 
+		 *   inner join apprelease R 
+		 *      on AR.release_fk=R.id 
+		 * where 
+		 *    A.id=1
 		 */
 
 		return result;
