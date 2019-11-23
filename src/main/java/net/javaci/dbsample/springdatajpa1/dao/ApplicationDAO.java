@@ -1,6 +1,7 @@
 package net.javaci.dbsample.springdatajpa1.dao;
 
 import net.javaci.dbsample.springdatajpa1.entity.Application;
+import net.javaci.dbsample.springdatajpa1.entity.dto.ApplicationDTO;
 
 public interface ApplicationDAO {
 
@@ -17,5 +18,7 @@ public interface ApplicationDAO {
 	Application getApplicationWithTicketsAndReleases(int applicationId);
 
 	Application getApplicationWithTicketsAndReleasesV2(int applicationId);
+
+	ApplicationDTO getApplicationWithTicketsAndReleasesV3(int applicationId);
 	
 }

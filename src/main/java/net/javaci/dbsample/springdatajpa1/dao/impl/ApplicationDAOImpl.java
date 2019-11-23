@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import net.javaci.dbsample.springdatajpa1.dao.ApplicationDAO;
 import net.javaci.dbsample.springdatajpa1.entity.Application;
+import net.javaci.dbsample.springdatajpa1.entity.dto.ApplicationDTO;
 
 @Transactional
 @Repository
@@ -100,6 +100,27 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 
 		return result;
     }
+	
+	@Override
+    public ApplicationDTO getApplicationWithTicketsAndReleasesV3(int applicationId) {
+		
+		String jpql = "SELECT"
+				+ " new net.javaci.dbsample.springdatajpa1.entity.dto.ApplicationDTO("
+				+ "    a.name, a.owner, max(t.id), max(r.id)"
+				+ " )"
+				+ " FROM Application a"
+				+ "    INNER JOIN a.tickets t "
+				+ "    INNER JOIN a.releasesToDeploy r "
+				+ " GROUP BY a.id, a.name, a.owner"
+				+ " HAVING a.id=?";
+		
+		ApplicationDTO result = entityManager
+        		.createQuery(jpql, ApplicationDTO.class)
+        		.setParameter(0, applicationId)
+        		.getSingleResult();
+
+		return result;
+	}
 	
 	@Override
     public boolean applicationExists(String name, String owner) {

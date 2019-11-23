@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,6 +24,7 @@ import net.javaci.dbsample.springdatajpa1.dao.TicketDAO;
 import net.javaci.dbsample.springdatajpa1.entity.Application;
 import net.javaci.dbsample.springdatajpa1.entity.Release;
 import net.javaci.dbsample.springdatajpa1.entity.Ticket;
+import net.javaci.dbsample.springdatajpa1.entity.dto.ApplicationDTO;
 
 @SpringBootApplication
 public class AppMain implements CommandLineRunner {
@@ -167,19 +167,13 @@ public class AppMain implements CommandLineRunner {
 		// Gets lazy init exception
 		// Application application = applicationDAO.getApplicationById(1);
 		
-		Application application = applicationDAO.getApplicationWithTicketsAndReleasesV2(1);
+		ApplicationDTO application = applicationDAO.getApplicationWithTicketsAndReleasesV3(1);
 		
-		List<Ticket> tickets = application.getTickets();
-		List<Integer> ticketIdList = tickets.stream().mapToInt(t->t.getId()).boxed().collect(Collectors.toList());
-		ticketDAO.removeTickets(tickets);
+		Integer ticketId = application.getLastTicketId();
+		ticketDAO.removeTicket(ticketDAO.getTicketById(ticketId));
 
-		boolean stillNotRemoved = false;
-		for (Integer ticketId : ticketIdList) {
-			Ticket removedTicket = ticketDAO.getTicketById(ticketId);
-			stillNotRemoved = (removedTicket==null);
-		}
-		
-		log.info("Is removed? {}", stillNotRemoved);
+		Ticket removedTicket = ticketDAO.getTicketById(ticketId);
+		log.info("Is removed? {}", removedTicket==null);
 		
 		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
 	}
