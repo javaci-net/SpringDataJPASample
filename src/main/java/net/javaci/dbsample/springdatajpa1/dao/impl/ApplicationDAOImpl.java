@@ -14,7 +14,9 @@ import org.springframework.stereotype.Repository;
 
 import net.javaci.dbsample.springdatajpa1.dao.ApplicationDAO;
 import net.javaci.dbsample.springdatajpa1.entity.Application;
+import net.javaci.dbsample.springdatajpa1.entity.Ticket;
 import net.javaci.dbsample.springdatajpa1.entity.dto.ApplicationDTO;
+import net.javaci.dbsample.springdatajpa1.entity.dto.TicketStatsByStatusDTO;
 
 @Transactional
 @Repository
@@ -105,10 +107,10 @@ public class ApplicationDAOImpl implements ApplicationDAO {
     public ApplicationDTO getApplicationWithTicketsAndReleasesV3(int applicationId) {
 		
 		String jpql = "SELECT"
-				+ " new net.javaci.dbsample.springdatajpa1.entity.dto.ApplicationDTO("
-				+ "    a.name, a.owner, max(t.id), max(r.id)"
+				+ " new " + ApplicationDTO.class.getCanonicalName() + "( "
+				+ "    a.name, a.owner, max(t.id), max(r.id) "
 				+ " )"
-				+ " FROM Application a"
+				+ " FROM " + Application.class.getSimpleName() + " a"
 				+ "    INNER JOIN a.tickets t "
 				+ "    INNER JOIN a.releasesToDeploy r "
 				+ " GROUP BY a.id, a.name, a.owner"

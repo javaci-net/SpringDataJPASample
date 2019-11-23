@@ -25,6 +25,7 @@ import net.javaci.dbsample.springdatajpa1.entity.Application;
 import net.javaci.dbsample.springdatajpa1.entity.Release;
 import net.javaci.dbsample.springdatajpa1.entity.Ticket;
 import net.javaci.dbsample.springdatajpa1.entity.dto.ApplicationDTO;
+import net.javaci.dbsample.springdatajpa1.entity.dto.TicketStatsByStatusDTO;
 
 @SpringBootApplication
 public class AppMain implements CommandLineRunner {
@@ -54,6 +55,8 @@ public class AppMain implements CommandLineRunner {
 		testReadWithJpql();
 		
 		testReadWithCriteria();
+		
+		testReadWithDTO();
 		
 		testUpdate();
 		
@@ -138,6 +141,17 @@ public class AppMain implements CommandLineRunner {
 		String owner = "volkan";
 		boolean appExists = applicationDAO.applicationReallyExists(name, owner);
 		log.info("Is app exists with name {} and owner {} ? {}", name, owner, appExists);
+		
+		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
+	}
+	
+	private void testReadWithDTO() {
+		
+		log.info( ">> TEST READ WITH DTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+		
+		List<TicketStatsByStatusDTO> ticketStats = ticketDAO.findTicketStats();
+		ticketStats.forEach(ts->log.info("** Status: {}, Count: {}, Min Creation: {}, Max Creation: {} ", 
+				ts.getStatus(), ts.getCount(), ts.getMaxCreateDateTime(), ts.getMaxCreateDateTime()));
 		
 		log.info( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ");
 	}
