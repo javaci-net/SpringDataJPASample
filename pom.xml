@@ -33,6 +33,11 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		
 		<!-- we need to add the target/generated-sources/annotations folder to the classpath of our IDE, 
 		as by default, the classes will be generated in this folder only -->
 		<dependency>

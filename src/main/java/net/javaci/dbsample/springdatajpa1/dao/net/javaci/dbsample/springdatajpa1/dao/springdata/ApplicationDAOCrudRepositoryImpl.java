@@ -24,6 +24,7 @@ import net.javaci.dbsample.springdatajpa1.entity.dto.ApplicationDTO;
 @Transactional
 @Repository
 @Primary
+// @RepositoryRestResource(collectionResourceRel = "application", path = "application")
 public interface ApplicationDAOCrudRepositoryImpl extends ApplicationDAO, JpaRepository<Application, Integer> {
 
 	long countByOwner(String owner);
