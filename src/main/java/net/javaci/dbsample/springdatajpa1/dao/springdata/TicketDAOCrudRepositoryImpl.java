@@ -1,4 +1,4 @@
-package net.javaci.dbsample.springdatajpa1.dao.net.javaci.dbsample.springdatajpa1.dao.springdata;
+package net.javaci.dbsample.springdatajpa1.dao.springdata;
 
 import java.util.List;
 

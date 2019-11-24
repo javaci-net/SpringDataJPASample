@@ -1,4 +1,4 @@
-package net.javaci.dbsample.springdatajpa1.dao.net.javaci.dbsample.springdatajpa1.dao.springdata;
+package net.javaci.dbsample.springdatajpa1.dao.springdata;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +24,6 @@ import net.javaci.dbsample.springdatajpa1.entity.dto.ApplicationDTO;
 @Transactional
 @Repository
 @Primary
-// @RepositoryRestResource(collectionResourceRel = "application", path = "application")
 public interface ApplicationDAOCrudRepositoryImpl extends ApplicationDAO, JpaRepository<Application, Integer> {
 
 	long countByOwner(String owner);
