@@ -68,7 +68,7 @@ public class AppMain implements CommandLineRunner {
 		
 		testSpringDataMethods();
 		
-		// Go to localhost:8080/dataapi to access Spring Data REST API
+		// Go to localhost:8080 to access Spring Data REST API
 	}
 
 	private void testPersist() {
