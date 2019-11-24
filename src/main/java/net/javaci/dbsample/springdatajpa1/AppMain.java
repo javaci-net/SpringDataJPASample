@@ -24,7 +24,7 @@ import org.springframework.data.domain.Sort;
 
 import net.javaci.dbsample.springdatajpa1.dao.impl.ReleaseDAOImpl;
 import net.javaci.dbsample.springdatajpa1.dao.impl.TicketDAOImpl;
-import net.javaci.dbsample.springdatajpa1.dao.net.javaci.dbsample.springdatajpa1.dao.springdata.ApplicationDAOCrudRepositoryImpl;
+import net.javaci.dbsample.springdatajpa1.dao.springdata.ApplicationDAOCrudRepositoryImpl;
 import net.javaci.dbsample.springdatajpa1.entity.Application;
 import net.javaci.dbsample.springdatajpa1.entity.Release;
 import net.javaci.dbsample.springdatajpa1.entity.Ticket;
