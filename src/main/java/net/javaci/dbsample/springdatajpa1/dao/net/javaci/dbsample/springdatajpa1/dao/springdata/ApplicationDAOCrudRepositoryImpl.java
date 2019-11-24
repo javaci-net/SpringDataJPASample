@@ -74,6 +74,7 @@ public interface ApplicationDAOCrudRepositoryImpl extends ApplicationDAO, JpaRep
 	void setNameAndOwnerById(Integer applicationId, String newName, String newOwner);
 	
 	/** @deprecated Use save */
+	@Deprecated
 	@Override
 	default void addApplication(Application application) {
 		save(application);
