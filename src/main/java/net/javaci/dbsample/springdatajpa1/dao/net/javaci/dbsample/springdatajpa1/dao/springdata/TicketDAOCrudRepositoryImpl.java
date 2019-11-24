@@ -2,12 +2,17 @@ package net.javaci.dbsample.springdatajpa1.dao.net.javaci.dbsample.springdatajpa
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import net.javaci.dbsample.springdatajpa1.dao.TicketDAO;
 import net.javaci.dbsample.springdatajpa1.entity.Ticket;
 import net.javaci.dbsample.springdatajpa1.entity.dto.TicketStatsByStatusDTO;
 
+@Transactional
+@Repository
 public interface TicketDAOCrudRepositoryImpl extends TicketDAO, JpaRepository<Ticket, Integer> {
 
 	/** @deprecated Use save */

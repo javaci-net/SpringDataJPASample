@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import net.javaci.dbsample.springdatajpa1.dao.TicketDAO;
@@ -18,6 +19,7 @@ import net.javaci.dbsample.springdatajpa1.entity.dto.TicketStatsByStatusDTO;
 
 @Transactional
 @Repository
+@Primary
 public class TicketDAOImpl implements TicketDAO {
 
 	@PersistenceContext

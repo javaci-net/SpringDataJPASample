@@ -22,8 +22,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-import net.javaci.dbsample.springdatajpa1.dao.ReleaseDAO;
-import net.javaci.dbsample.springdatajpa1.dao.TicketDAO;
+import net.javaci.dbsample.springdatajpa1.dao.impl.ReleaseDAOImpl;
+import net.javaci.dbsample.springdatajpa1.dao.impl.TicketDAOImpl;
 import net.javaci.dbsample.springdatajpa1.dao.net.javaci.dbsample.springdatajpa1.dao.springdata.ApplicationDAOCrudRepositoryImpl;
 import net.javaci.dbsample.springdatajpa1.entity.Application;
 import net.javaci.dbsample.springdatajpa1.entity.Release;
@@ -36,11 +36,11 @@ public class AppMain implements CommandLineRunner {
 
 	@PersistenceContext private EntityManager entityManager;
 	
-	@Autowired private TicketDAO ticketDAO;
+	@Autowired private TicketDAOImpl ticketDAO;
 	
 	@Autowired private ApplicationDAOCrudRepositoryImpl applicationDAO;
 	
-	@Autowired private ReleaseDAO releaseDAO;
+	@Autowired private ReleaseDAOImpl releaseDAO;
 	
 	private static final Logger log = LoggerFactory.getLogger(AppMain.class);
 	
